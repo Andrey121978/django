@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
 DATA = {
@@ -28,3 +29,23 @@ DATA = {
 #     'ингредиент2': количество2,
 #   }
 # }
+
+
+def ingridient(request, recipe):
+    if recipe in DATA:
+        serving = int(request.GET.get("servings", 1))
+        ingridient_dict = {}
+        ingridient_dict_serving = {}
+        ingridient_dict = DATA[recipe]
+        for key, values in ingridient_dict.items():
+            ingridient_dict_serving[key] = values * serving
+
+        context = {
+            'recipe': ingridient_dict_serving
+
+            }
+    else:
+        context = None
+
+
+    return render(request, 'calculator/index.html', context)
