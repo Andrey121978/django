@@ -34,10 +34,10 @@ DATA = {
 def ingridient(request, recipe):
     if recipe in DATA:
         serving = int(request.GET.get("servings", 1))
-        ingridient_dict = {}
+
         ingridient_dict_serving = {}
-        ingridient_dict = DATA[recipe]
-        for key, values in ingridient_dict.items():
+
+        for key, values in  DATA[recipe].items():
             ingridient_dict_serving[key] = values * serving
 
         context = {
